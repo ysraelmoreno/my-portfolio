@@ -6,7 +6,7 @@ function Navbar() {
   return (
     <NavbarContainer>
       <NavItem href="#">Home</NavItem>
-      <NavItem href="#">Projects</NavItem>
+      <NavItem href="#projects">Projects</NavItem>
       <NavItem href="#">Contact</NavItem>
       <NavItem href="#">Blog</NavItem>
       <NavItem href="#">
