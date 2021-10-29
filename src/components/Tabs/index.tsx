@@ -1,28 +1,86 @@
-import { MouseEvent, useCallback, useEffect, useState } from "react";
+import { MouseEvent, useCallback, useEffect, useMemo, useState } from "react";
 import ProjectsLoading from "../ProjectsLoading";
+import { StructuredTextGraphQlResponse } from "react-datocms";
 import ReposList from "../ReposList";
 import { TabsContainer, TabsItemContainer } from "./styles";
 import TabsContent from "./TabsContent";
 import TabsItem from "./TabsItem";
-import { useLoading } from "../../contexts/LoadingContext";
-import repos from "../../data/reposList";
+import { useQuery, gql } from "@apollo/client";
 interface TabsProps {
   defaultTab?: number;
 }
 
-function Tabs({ defaultTab = 1 }: TabsProps) {
-  const [activeTab, setActiveTab] = useState(1);
+interface IStacks {
+  stacks: string[];
+}
+interface ProjectsItemProps {
+  stacks: IStacks;
+  title: string;
+  subtitle: StructuredTextGraphQlResponse;
+}
+interface ProjectsData {
+  allProjects: ProjectsItemProps[];
+}
 
-  const { isLoading } = useLoading();
+function Tabs({ defaultTab = 0 }: TabsProps) {
+  const REPOS_QUERY = gql`
+    query MyQuery {
+      allProjects {
+        stacks
+        title
+        subtitle {
+          value
+        }
+        thumbnail {
+          responsiveImage {
+            src
+            srcSet
+            base64
+            width
+            height
+            sizes
+            aspectRatio
+          }
+        }
+        repoUrl
+      }
+    }
+  `;
+
+  const { data, loading } = useQuery(REPOS_QUERY);
+
+  const [activeTab, setActiveTab] = useState(0);
+
+  const allProjects: ProjectsItemProps[] = useMemo(
+    () => data?.allProjects,
+    [data]
+  );
 
   const handleTabClick = useCallback((ev: MouseEvent<HTMLButtonElement>) => {
     setActiveTab(Number(ev.currentTarget.value));
   }, []);
 
+  const findReactProjects = useMemo(
+    () =>
+      allProjects?.filter((project) =>
+        project?.stacks.stacks.includes("ReactJS")
+      ),
+    [allProjects]
+  );
+
+  const findJavascriptProjects = useMemo(
+    () =>
+      allProjects?.filter((project) =>
+        project?.stacks.stacks.includes("Javascript")
+      ),
+    [allProjects]
+  );
+
   useEffect(() => {
     setActiveTab(defaultTab);
   }, [defaultTab]);
 
+  console.log(data);
   return (
     <TabsContainer>
       <TabsItemContainer>
@@ -38,27 +96,51 @@ function Tabs({ defaultTab = 1 }: TabsProps) {
       </TabsItemContainer>
 
       <TabsContent active={0 === activeTab}>
-        {isLoading ? <ProjectsLoading /> : <p>Teste</p>}
-      </TabsContent>
-      <TabsContent active={1 === activeTab}>
-        {isLoading ? (
+        {loading ? (
           <ProjectsLoading />
         ) : (
           <>
-            {repos.map((repo) => (
+            {data.allProjects.map((repo: any) => (
               <ReposList
                 title={repo.title}
-                subtitle={repo.subTitle}
-                imgURL={repo.imgURL}
-                stacks={repo.stacks}
-                url={repo.url}
+                subtitle={repo.subtitle.value}
+                thumbnail={repo.thumbnail.responsiveImage}
+                stacks={repo.stacks.stacks}
+                url={repo.repoUrl}
               />
             ))}
           </>
         )}
       </TabsContent>
+      <TabsContent active={1 === activeTab}>
+        {loading ? (
+          <ProjectsLoading />
+        ) : (
+          findReactProjects?.map((repo: any) => (
+            <ReposList
+              title={repo.title}
+              subtitle={repo.subtitle.value}
+              thumbnail={repo.thumbnail.responsiveImage}
+              stacks={repo.stacks.stacks}
+              url={repo.repoUrl}
+            />
+          ))
+        )}
+      </TabsContent>
       <TabsContent active={2 === activeTab}>
-        {isLoading ? <ProjectsLoading /> : <p>Teste</p>}
+        {loading ? (
+          <ProjectsLoading />
+        ) : (
+          findJavascriptProjects?.map((repo: any) => (
+            <ReposList
+              title={repo.title}
+              subtitle={repo.subtitle.value}
+              thumbnail={repo.thumbnail.responsiveImage}
+              stacks={repo.stacks.stacks}
+              url={repo.repoUrl}
+            />
+          ))
+        )}
       </TabsContent>
     </TabsContainer>
   );

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const ProjectsContainer = styled.div`
-  height: 700px;
   max-width: 1240px;
   width: 100%;
   margin: 0 auto;

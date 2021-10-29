@@ -29,13 +29,15 @@ export const Header = styled.header`
 
   img {
     width: 20%;
+    min-width: 200px;
   }
 `;
 
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 20%;
+  justify-content: center;
+  height: 100%;
 
   h1 {
     text-shadow: 0px 0px 16px rgba(42, 217, 255, 0.35);

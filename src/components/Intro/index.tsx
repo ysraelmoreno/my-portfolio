@@ -1,11 +1,26 @@
+import { useQuery, gql } from "@apollo/client";
 import Navbar from "../Navbar";
 import { FiChevronDown } from "react-icons/fi";
-
+import { StructuredText } from "react-datocms";
 import { Container, Content, ContentContainer, Header } from "./styles";
 import Logo from "../../assets/logo.svg";
 import Button from "../Button";
+import LoadingIntroTexts from "./LoadingIntroTexts";
 
 function Intro() {
+  const HOME_QUERY = gql`
+    query IntroPage {
+      intropage {
+        title
+        subtitle {
+          value
+        }
+      }
+    }
+  `;
+
+  const { data, loading } = useQuery(HOME_QUERY);
+  console.log(data);
   return (
     <Container>
       <ContentContainer>
@@ -14,18 +29,17 @@ function Intro() {
           <Navbar />
         </Header>
         <Content>
-          <h1>
-            👋 I’m Ysrael Moreno, a <br /> front-end developer{" "}
-          </h1>
-          <p>
-            Learning ReactJS and NextJS to create applications to be fast as a
-            rocket! 🚀 <br />
-            From Sorocaba, São Paulo - Brasil to the world! ✈
-          </p>
-
-          <Button>
-            <FiChevronDown /> See my projects
-          </Button>
+          {loading ? (
+            <LoadingIntroTexts />
+          ) : (
+            <>
+              <h1>{data.intropage.title}</h1>
+              <StructuredText data={data.intropage.subtitle.value.document} />
+              <Button>
+                <FiChevronDown /> See my projects
+              </Button>
+            </>
+          )}
         </Content>
       </ContentContainer>
     </Container>

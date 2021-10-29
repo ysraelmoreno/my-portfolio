@@ -10,7 +10,7 @@ function ProjectLoadingItem() {
   return (
     <LoadingContainer>
       <Container>
-        <ProjectLoadingContainer width="285px" height="200px" />
+        <ProjectLoadingContainer width="385px" height="200px" />
         <InfoContainerLoading>
           <ProjectLoadingContainer width="285px" height="40px" />
           <ProjectLoadingContainer width="100%" height="55px" />

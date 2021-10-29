@@ -11,7 +11,6 @@ export const TabsItemContainer = styled.button<TabsItemContainerProps>`
   position: relative;
 
   color: #6a6a6a;
-  min-width: 200px;
   width: 100%;
 
   display: flex;
