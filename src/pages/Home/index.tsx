@@ -1,3 +1,4 @@
+import About from "../../components/About";
 import Intro from "../../components/Intro";
 import Projects from "../../components/Projects";
 import { Container } from "./styles";
@@ -7,6 +8,7 @@ function Home() {
     <Container>
       <Intro />
       <Projects />
+      <About />
     </Container>
   );
 }

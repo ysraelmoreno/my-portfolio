@@ -35,5 +35,6 @@ export const NavItem = styled.a`
 
   &:hover::after {
     width: 100%;
+    box-shadow: 0px 0px 4px rgba(42, 217, 255, 0.65);
   }
 `;
