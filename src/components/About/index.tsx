@@ -21,7 +21,7 @@ function About() {
         textAbout {
           value
         }
-        myself {
+        photo {
           url
           responsiveImage {
             src
@@ -38,7 +38,6 @@ function About() {
   `;
 
   const { data, loading } = useQuery(ABOUT_QUERY);
-  console.log(data);
   return (
     <Container>
       <AboutContainer>
@@ -46,7 +45,7 @@ function About() {
           {loading ? (
             <LoadingImage />
           ) : (
-            <Image data={data.aboutText.myself.responsiveImage} />
+            <Image data={data.aboutText.photo.responsiveImage} />
           )}
         </ImageContainer>
         <TextContainer>
