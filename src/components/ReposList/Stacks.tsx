@@ -10,8 +10,18 @@ function ShowStacks({ stacks }: StacksProps): JSX.Element {
     reactjs: <Icon icon={SiReact} />,
   };
 
+  const stacksToLowerCase = (stack: string): string => {
+    return String(stack).toLowerCase();
+  };
   return (
-    <IconContainer>{stacks.map((stack) => listOfStacks[stack])}</IconContainer>
+    <IconContainer>
+      {stacks.map(
+        (stack) =>
+          listOfStacks[
+            stacksToLowerCase(stack) as "javascript" | "typescript" | "reactjs"
+          ]
+      )}
+    </IconContainer>
   );
 }
 

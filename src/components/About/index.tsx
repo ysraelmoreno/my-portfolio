@@ -11,6 +11,7 @@ import {
 
 import LoadingText from "./LoadingText";
 import LoadingImage from "./LoadingImage";
+import SocialMedia from "./SocialMedia";
 
 function About() {
   const ABOUT_QUERY = gql`
@@ -21,6 +22,7 @@ function About() {
         textAbout {
           value
         }
+        socialMedia
         photo {
           url
           responsiveImage {
@@ -38,6 +40,7 @@ function About() {
   `;
 
   const { data, loading } = useQuery(ABOUT_QUERY);
+  console.log(data);
   return (
     <Container>
       <AboutContainer>
@@ -61,8 +64,7 @@ function About() {
 
               <h3>Social Media</h3>
               <SocialMediaContainer>
-                <BsLinkedin />
-                <BsGithub />
+                <SocialMedia socialMedias={data.aboutText.socialMedia} />
               </SocialMediaContainer>
             </>
           )}

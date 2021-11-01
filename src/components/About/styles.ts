@@ -7,7 +7,7 @@ export const Container = styled.div`
 export const AboutContainer = styled.div`
   display: flex;
   background-color: #fff;
-  padding: 40px;
+  padding: 80px 40px;
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
@@ -41,11 +41,20 @@ export const TextContainer = styled.div`
 `;
 
 export const SocialMediaContainer = styled.div`
-  svg {
-    margin-top: 10px;
+  margin-top: 10px;
+  display: flex;
+  width: 100%;
+  a {
+    display: flex;
+    align-items: center;
     font-size: 30px;
+    transition: all 0.3s ease;
+    color: #b1b1b1;
+    &:hover {
+      color: #101010;
+    }
 
-    & + svg {
+    & + a {
       margin-left: 20px;
     }
   }

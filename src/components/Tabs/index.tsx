@@ -4,16 +4,39 @@ import ReposList from "../ReposList";
 import { TabsContainer, TabsItemContainer } from "./styles";
 import TabsContent from "./TabsContent";
 import TabsItem from "./TabsItem";
-import { useLoading } from "../../contexts/LoadingContext";
-import repos from "../../data/reposList";
+import { useQuery, gql } from "@apollo/client";
 interface TabsProps {
   defaultTab?: number;
 }
 
-function Tabs({ defaultTab = 1 }: TabsProps) {
-  const [activeTab, setActiveTab] = useState(1);
+function Tabs({ defaultTab = 0 }: TabsProps) {
+  const REPOS_QUERY = gql`
+    query MyQuery {
+      allProjects {
+        stacks
+        title
+        subtitle {
+          value
+        }
+        thumbnail {
+          responsiveImage {
+            src
+            srcSet
+            base64
+            width
+            height
+            sizes
+            aspectRatio
+          }
+        }
+        repoUrl
+      }
+    }
+  `;
 
-  const { isLoading } = useLoading();
+  const { data, loading } = useQuery(REPOS_QUERY);
+
+  const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = useCallback((ev: MouseEvent<HTMLButtonElement>) => {
     setActiveTab(Number(ev.currentTarget.value));
@@ -38,27 +61,27 @@ function Tabs({ defaultTab = 1 }: TabsProps) {
       </TabsItemContainer>
 
       <TabsContent active={0 === activeTab}>
-        {isLoading ? <ProjectsLoading /> : <p>Teste</p>}
-      </TabsContent>
-      <TabsContent active={1 === activeTab}>
-        {isLoading ? (
+        {loading ? (
           <ProjectsLoading />
         ) : (
           <>
-            {repos.map((repo) => (
+            {data.allProjects.map((repo: any) => (
               <ReposList
                 title={repo.title}
-                subtitle={repo.subTitle}
-                imgURL={repo.imgURL}
-                stacks={repo.stacks}
-                url={repo.url}
+                subtitle={repo.subtitle.value}
+                thumbnail={repo.thumbnail.responsiveImage}
+                stacks={repo.stacks.stacks}
+                url={repo.repoUrl}
               />
             ))}
           </>
         )}
       </TabsContent>
+      <TabsContent active={1 === activeTab}>
+        {loading ? <ProjectsLoading /> : <p>Teste</p>}
+      </TabsContent>
       <TabsContent active={2 === activeTab}>
-        {isLoading ? <ProjectsLoading /> : <p>Teste</p>}
+        {loading ? <ProjectsLoading /> : <p>Teste</p>}
       </TabsContent>
     </TabsContainer>
   );
