@@ -1,5 +1,4 @@
 import { useQuery, gql } from "@apollo/client";
-import { BsLinkedin, BsGithub } from "react-icons/bs";
 import { StructuredText, Image } from "react-datocms";
 import {
   AboutContainer,
