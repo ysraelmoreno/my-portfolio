@@ -1,4 +1,5 @@
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { ModalProvider } from "./context/ModalContext";
 
 import Home from "./pages/Home";
 import GlobalStyle from "./styles/global";
@@ -16,7 +17,9 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Home />
+      <ModalProvider>
+        <Home />
+      </ModalProvider>
       <GlobalStyle />
     </ApolloProvider>
   );

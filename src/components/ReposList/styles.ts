@@ -7,6 +7,12 @@ export const Container = styled.div`
   border-radius: 10px;
   padding: 20px;
   width: 100%;
+
+  picture {
+    img {
+      object-fit: cover;
+    }
+  }
 `;
 
 export const InfoContainer = styled.div`

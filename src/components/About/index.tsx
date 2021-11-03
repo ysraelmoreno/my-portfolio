@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import { useQuery, gql } from "@apollo/client";
 import { StructuredText, Image } from "react-datocms";
 import {
@@ -11,8 +13,11 @@ import {
 import LoadingText from "./LoadingText";
 import LoadingImage from "./LoadingImage";
 import SocialMedia from "./SocialMedia";
+import useOnScreen from "../../hooks/useOnScreen";
 
 function About() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const ABOUT_QUERY = gql`
     query MyQuery {
       aboutText {
@@ -39,10 +44,12 @@ function About() {
   `;
 
   const { data, loading } = useQuery(ABOUT_QUERY);
-  console.log(data);
+
+  const isVisible = useOnScreen(containerRef);
+
   return (
-    <Container>
-      <AboutContainer>
+    <Container ref={containerRef}>
+      <AboutContainer visible={isVisible}>
         <ImageContainer>
           {loading ? (
             <LoadingImage />

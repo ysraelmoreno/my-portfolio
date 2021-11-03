@@ -11,6 +11,7 @@ export default createGlobalStyle`
     background-color: #101010;
     color: white;
     font-family: 'Poppins';
+    overflow-x: hidden;
   }
 
   button {
