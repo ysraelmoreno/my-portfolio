@@ -35,9 +35,9 @@ function NavMobileButton() {
       isOpen={isOpen}
       onClick={() => setIsOpen(!isOpen)}
     >
-      <MenuBar style={topBarProps}></MenuBar>
-      <MenuBar style={middleBarProps}></MenuBar>
-      <MenuBar style={bottomBarProps}></MenuBar>
+      <MenuBar isOpen={isOpen} style={topBarProps}></MenuBar>
+      <MenuBar isOpen={isOpen} style={middleBarProps}></MenuBar>
+      <MenuBar isOpen={isOpen} style={bottomBarProps}></MenuBar>
     </NavMobileButtonContainer>
   );
 }

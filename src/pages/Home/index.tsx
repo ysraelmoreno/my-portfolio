@@ -1,4 +1,5 @@
 import About from "../../components/About";
+import Contact from "../../components/Contact";
 
 import Experience from "../../components/Experience";
 import Intro from "../../components/Intro";
@@ -12,6 +13,7 @@ function Home() {
       <Projects />
       <About />
       <Experience />
+      <Contact />
     </Container>
   );
 }

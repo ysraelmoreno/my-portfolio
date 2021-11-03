@@ -56,13 +56,23 @@ export const Link = styled.a`
 
 export const StacksAndLinkContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin-top: 30px;
 `;
 
 export const IconContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
   svg + svg {
     margin-left: 10px;
+  }
+
+  @media (max-width: 1240px) {
+    svg {
+      margin-bottom: 10px;
+    }
   }
 `;

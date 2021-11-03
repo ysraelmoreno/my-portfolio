@@ -1,12 +1,12 @@
 import { Container } from "./styles";
 
-interface WorkProps {
+interface TimelineInfoProps {
   title: string;
   subtitle: string;
   description?: string;
 }
 
-function Work({ title, subtitle, description }: WorkProps) {
+function TimelineInfo({ title, subtitle, description }: TimelineInfoProps) {
   return (
     <Container>
       <h1>{title}</h1>
@@ -16,4 +16,4 @@ function Work({ title, subtitle, description }: WorkProps) {
   );
 }
 
-export default Work;
+export default TimelineInfo;

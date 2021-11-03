@@ -5,6 +5,9 @@ interface NavMobileButtonContainerProps {
   isOpen: boolean;
 }
 
+interface NavItemProps {
+  isOpen: boolean;
+}
 export const NavbarContainer = styled.nav`
   display: flex;
   align-items: center;
@@ -58,11 +61,18 @@ export const NavMobileButtonContainer = styled.button<NavMobileButtonContainerPr
   transition: all 0.2s ease-in-out;
   border: none;
   z-index: 9999;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   ${(props) =>
     props.isOpen &&
     css`
-      transform: translateX(-200px);
+      background-color: white;
+      width: 45px;
+      height: 55px;
+      border-radius: 10px 0 0 10px;
+      transform: translateX(-190px);
     `}
 
   @media (min-width: 768px) {
@@ -70,7 +80,7 @@ export const NavMobileButtonContainer = styled.button<NavMobileButtonContainerPr
   }
 `;
 
-export const MenuBar = styled(animated.div)`
+export const MenuBar = styled(animated.div)<NavItemProps>`
   width: 100%;
   height: 3px;
   background-color: white;
@@ -81,6 +91,13 @@ export const MenuBar = styled(animated.div)`
   & + div {
     margin-top: 5px;
   }
+
+  ${(props) =>
+    props.isOpen &&
+    css`
+      width: 70%;
+      background-color: #101010;
+    `}
 `;
 
 export const ModalNavbar = styled.div`
