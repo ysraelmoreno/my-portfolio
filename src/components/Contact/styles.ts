@@ -37,5 +37,17 @@ export const SocialMediaItems = styled(SocialMediaContainer)`
 
   a {
     opacity: 0.7 !important;
+
+    &:hover {
+      opacity: 1 !important;
+    }
+  }
+`;
+
+export const RepoLink = styled.a`
+  opacity: 0.7 !important;
+  transition: all 0.2s ease;
+  &:hover {
+    opacity: 1 !important;
   }
 `;

@@ -1,6 +1,11 @@
 import { gql, useQuery } from "@apollo/client";
 import SocialMedia from "../About/SocialMedia";
-import { ContactContainer, Content, SocialMediaItems } from "./styles";
+import {
+  ContactContainer,
+  Content,
+  SocialMediaItems,
+  RepoLink,
+} from "./styles";
 
 function Contact() {
   const SOCIALMEDIA_QUERY = gql`
@@ -30,13 +35,13 @@ function Contact() {
               This website is made with ReactJS, see the full project on my
               github
             </span>
-            <a
+            <RepoLink
               target="_blank"
               rel="noreferrer"
               href="https://github.com/ysraelmoreno/my-portfolio"
             >
               https://github.com/ysraelmoreno/my-portfolio
-            </a>
+            </RepoLink>
           </>
         )}
       </Content>
