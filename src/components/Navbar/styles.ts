@@ -29,6 +29,7 @@ export const NavItem = styled.a`
   transition: all 0.2s ease-in-out;
   font-size: 12px;
   width: 100%;
+
   & + a {
     margin-left: 25px;
   }
@@ -52,6 +53,12 @@ export const NavItem = styled.a`
     width: 100%;
     box-shadow: 0px 0px 4px rgba(42, 217, 255, 0.65);
   }
+
+  @media (max-width: 1240px) {
+    &::after {
+      margin-top: 10px;
+    }
+  }
 `;
 
 export const NavMobileButtonContainer = styled.button<NavMobileButtonContainerProps>`
@@ -62,13 +69,14 @@ export const NavMobileButtonContainer = styled.button<NavMobileButtonContainerPr
   border: none;
   z-index: 9999;
   display: flex;
+
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   ${(props) =>
     props.isOpen &&
     css`
-      background-color: white;
       width: 45px;
       height: 55px;
       border-radius: 10px 0 0 10px;
@@ -96,18 +104,16 @@ export const MenuBar = styled(animated.div)<NavItemProps>`
     props.isOpen &&
     css`
       width: 70%;
-      background-color: #101010;
     `}
 `;
 
 export const ModalNavbar = styled.div`
   display: flex;
   flex-direction: column;
-
+  margin-top: 10px;
   a {
     color: black;
     margin: 10px 0;
-    border-bottom: 1px solid #ccc;
-    padding: 10px 20px;
+    padding: 0 20px;
   }
 `;

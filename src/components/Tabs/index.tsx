@@ -1,5 +1,6 @@
-import { MouseEvent, useCallback, useEffect, useState } from "react";
+import { MouseEvent, useCallback, useEffect, useMemo, useState } from "react";
 import ProjectsLoading from "../ProjectsLoading";
+import { StructuredTextGraphQlResponse } from "react-datocms";
 import ReposList from "../ReposList";
 import { TabsContainer, TabsItemContainer } from "./styles";
 import TabsContent from "./TabsContent";
@@ -7,6 +8,18 @@ import TabsItem from "./TabsItem";
 import { useQuery, gql } from "@apollo/client";
 interface TabsProps {
   defaultTab?: number;
+}
+
+interface IStacks {
+  stacks: string[];
+}
+interface ProjectsItemProps {
+  stacks: IStacks;
+  title: string;
+  subtitle: StructuredTextGraphQlResponse;
+}
+interface ProjectsData {
+  allProjects: ProjectsItemProps[];
 }
 
 function Tabs({ defaultTab = 0 }: TabsProps) {
@@ -38,14 +51,36 @@ function Tabs({ defaultTab = 0 }: TabsProps) {
 
   const [activeTab, setActiveTab] = useState(0);
 
+  const allProjects: ProjectsItemProps[] = useMemo(
+    () => data?.allProjects,
+    [data]
+  );
+
   const handleTabClick = useCallback((ev: MouseEvent<HTMLButtonElement>) => {
     setActiveTab(Number(ev.currentTarget.value));
   }, []);
+
+  const findReactProjects = useMemo(
+    () =>
+      allProjects?.filter((project) =>
+        project?.stacks.stacks.includes("ReactJS")
+      ),
+    [allProjects]
+  );
+
+  const findJavascriptProjects = useMemo(
+    () =>
+      allProjects?.filter((project) =>
+        project?.stacks.stacks.includes("Javascript")
+      ),
+    [allProjects]
+  );
 
   useEffect(() => {
     setActiveTab(defaultTab);
   }, [defaultTab]);
 
+  console.log(data);
   return (
     <TabsContainer>
       <TabsItemContainer>
@@ -78,10 +113,34 @@ function Tabs({ defaultTab = 0 }: TabsProps) {
         )}
       </TabsContent>
       <TabsContent active={1 === activeTab}>
-        {loading ? <ProjectsLoading /> : <p>Teste</p>}
+        {loading ? (
+          <ProjectsLoading />
+        ) : (
+          findReactProjects?.map((repo: any) => (
+            <ReposList
+              title={repo.title}
+              subtitle={repo.subtitle.value}
+              thumbnail={repo.thumbnail.responsiveImage}
+              stacks={repo.stacks.stacks}
+              url={repo.repoUrl}
+            />
+          ))
+        )}
       </TabsContent>
       <TabsContent active={2 === activeTab}>
-        {loading ? <ProjectsLoading /> : <p>Teste</p>}
+        {loading ? (
+          <ProjectsLoading />
+        ) : (
+          findJavascriptProjects?.map((repo: any) => (
+            <ReposList
+              title={repo.title}
+              subtitle={repo.subtitle.value}
+              thumbnail={repo.thumbnail.responsiveImage}
+              stacks={repo.stacks.stacks}
+              url={repo.repoUrl}
+            />
+          ))
+        )}
       </TabsContent>
     </TabsContainer>
   );
