@@ -28,7 +28,7 @@ export const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 100%;
-
+  padding: 20px;
   h1 {
     text-shadow: 0px 0px 16px rgba(42, 217, 255, 0.35);
     font-size: 36px;
