@@ -14,7 +14,6 @@ export const Container = styled.div`
 `;
 
 export const ExperienceContainer = styled.div`
-  max-width: 720px;
   width: 100%;
   display: flex;
   margin-bottom: 100px;
@@ -25,4 +24,8 @@ export const WorkExperienceInfo = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  span {
+    opacity: 0.5;
+  }
 `;

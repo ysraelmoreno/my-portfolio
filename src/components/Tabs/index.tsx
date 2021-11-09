@@ -76,7 +76,6 @@ function Tabs({ defaultTab = 0 }: TabsProps) {
     setActiveTab(defaultTab);
   }, [defaultTab]);
 
-  console.log(data);
   return (
     <TabsContainer>
       <TabsItemContainer>

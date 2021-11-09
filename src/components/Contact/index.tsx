@@ -19,7 +19,7 @@ function Contact() {
   const { data, loading } = useQuery(SOCIALMEDIA_QUERY);
 
   return (
-    <ContactContainer>
+    <ContactContainer id="contact">
       <Content>
         {loading ? (
           <div>Loading...</div>

@@ -1,11 +1,10 @@
 import { useQuery, gql } from "@apollo/client";
-import Navbar from "../Navbar";
 import { FiChevronDown } from "react-icons/fi";
 import { StructuredText } from "react-datocms";
-import { Container, Content, ContentContainer, Header } from "./styles";
-import Logo from "../../assets/logo.svg";
+import { Container, Content, ContentContainer } from "./styles";
 import Button from "../Button";
 import LoadingIntroTexts from "./LoadingIntroTexts";
+import Header from "../Header";
 
 function Intro() {
   const HOME_QUERY = gql`
@@ -20,14 +19,10 @@ function Intro() {
   `;
 
   const { data, loading } = useQuery(HOME_QUERY);
-  console.log(data);
   return (
-    <Container>
+    <Container id="home">
+      <Header />
       <ContentContainer>
-        <Header>
-          <img src={Logo} alt="Logo" />
-          <Navbar />
-        </Header>
         <Content>
           {loading ? (
             <LoadingIntroTexts />

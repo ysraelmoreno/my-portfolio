@@ -5,9 +5,11 @@ import TimelineInfo from "./TimelineInfo";
 
 function Experience() {
   return (
-    <Container>
+    <Container id="experience">
       <ExperienceContainer>
         <WorkExperienceInfo>
+          <span>Work Experience</span>
+
           <TimelineInfo
             title="Wordpress Web Developer"
             subtitle="Invento Agency"
@@ -25,9 +27,9 @@ function Experience() {
           />
         </WorkExperienceInfo>
         <Timeline items={["2018", "2020", "2021"]} />
-      </ExperienceContainer>
-      <ExperienceContainer>
         <WorkExperienceInfo>
+          <span>Degrees</span>
+
           <TimelineInfo
             title="Computer Programming"
             subtitle="ETEC Professor Elias Miguel Junior"
@@ -40,7 +42,6 @@ function Experience() {
           />
           <TimelineInfo title="Javascript Web Developing" subtitle="JStack" />
         </WorkExperienceInfo>
-        <Timeline items={["2018", "2020", "2021"]} />
       </ExperienceContainer>
     </Container>
   );

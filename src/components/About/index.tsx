@@ -41,7 +41,7 @@ function About() {
   const { data, loading } = useQuery(ABOUT_QUERY);
 
   return (
-    <Container>
+    <Container id="about">
       <AboutContainer>
         <ImageContainer>
           {loading ? (

@@ -6,8 +6,6 @@ export const Container = styled.section`
   width: 100%;
   height: 800px;
   max-height: 800px;
-  display: flex;
-  padding: 10px;
 
   background-image: url(${HomeBackground});
   background-repeat: no-repeat;
@@ -19,18 +17,10 @@ export const Container = styled.section`
 export const ContentContainer = styled.div`
   max-width: 1240px;
   width: 100%;
-  margin: 30px auto;
-`;
-
-export const Header = styled.header`
+  height: 100%;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-
-  img {
-    width: 20%;
-    min-width: 200px;
-  }
 `;
 
 export const Content = styled.div`

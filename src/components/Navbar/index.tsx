@@ -9,14 +9,15 @@ function Navbar() {
     <>
       <NavbarContainer>
         <Nav>
-          <NavItem href="#">Home</NavItem>
+          <NavItem href="#home">Home</NavItem>
+          <NavItem href="#about">Sobre</NavItem>
           <NavItem href="#projects">Projects</NavItem>
-          <NavItem href="#">Contact</NavItem>
+          <NavItem href="#contact">Contact</NavItem>
           <NavItem href="#">Blog</NavItem>
-          <NavItem href="#">
+          <NavItem href="https://github.com/ysraelmoreno">
             <FiGithub />
           </NavItem>
-          <NavItem href="#">
+          <NavItem href="https://www.linkedin.com/in/ysrael-moreno-789877160/">
             <FiLinkedin />
           </NavItem>
         </Nav>
@@ -24,14 +25,15 @@ function Navbar() {
 
         <Modal>
           <ModalNavbar>
-            <NavItem href="#">Home</NavItem>
+            <NavItem href="#home">Home</NavItem>
+            <NavItem href="#about">Sobre</NavItem>
             <NavItem href="#projects">Projects</NavItem>
-            <NavItem href="#">Contact</NavItem>
+            <NavItem href="#contact">Contact</NavItem>
             <NavItem href="#">Blog</NavItem>
-            <NavItem href="#">
+            <NavItem href="https://github.com/ysraelmoreno">
               <FiGithub />
             </NavItem>
-            <NavItem href="#">
+            <NavItem href="https://www.linkedin.com/in/ysrael-moreno-789877160/">
               <FiLinkedin />
             </NavItem>
           </ModalNavbar>
