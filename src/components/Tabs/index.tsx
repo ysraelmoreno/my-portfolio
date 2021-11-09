@@ -18,10 +18,6 @@ interface ProjectsItemProps {
   title: string;
   subtitle: StructuredTextGraphQlResponse;
 }
-interface ProjectsData {
-  allProjects: ProjectsItemProps[];
-}
-
 function Tabs({ defaultTab = 0 }: TabsProps) {
   const REPOS_QUERY = gql`
     query MyQuery {
