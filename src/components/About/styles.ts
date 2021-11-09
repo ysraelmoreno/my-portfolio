@@ -13,12 +13,20 @@ export const AboutContainer = styled.div`
   margin: 0 auto;
   opacity: 1;
   transition: all 0.3s ease-in-out;
-  transform: translateX(-30px);
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap-reverse;
+    align-items: center;
+  }
 `;
 
 export const ImageContainer = styled.div`
   div {
     height: 100%;
+
+    @media (max-width: 768px) {
+      margin-top: 20px;
+    }
     picture {
       img {
         border-radius: 10px;
@@ -31,6 +39,10 @@ export const ImageContainer = styled.div`
 export const TextContainer = styled.div`
   color: #101010;
   margin-left: 38px;
+
+  @media (max-width: 768px) {
+    margin: 0;
+  }
 
   span {
     opacity: 0.4;
