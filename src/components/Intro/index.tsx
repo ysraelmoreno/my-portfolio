@@ -2,7 +2,6 @@ import { useQuery, gql } from "@apollo/client";
 import { FiChevronDown } from "react-icons/fi";
 import { StructuredText } from "react-datocms";
 import { Container, Content, ContentContainer } from "./styles";
-import Button from "../Button";
 import LoadingIntroTexts from "./LoadingIntroTexts";
 import Header from "../Header";
 
@@ -30,9 +29,9 @@ function Intro() {
             <>
               <h1>{data.intropage.title}</h1>
               <StructuredText data={data.intropage.subtitle.value.document} />
-              <Button>
+              <a href="#projects">
                 <FiChevronDown /> See my projects
-              </Button>
+              </a>
             </>
           )}
         </Content>
