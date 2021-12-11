@@ -8,10 +8,14 @@ import Intro from "../components/Intro";
 
 import { api } from "../api/api";
 import About from "../components/About";
+import Head from "next/head";
 
 function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
+      <Head>
+        <title>Ysrael Moreno - Home</title>
+      </Head>
       <div>
         <Intro data={data.intropage} />
         <Projects />
