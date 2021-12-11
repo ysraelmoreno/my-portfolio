@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import { Connector, TimelineContainer, TimelineItem } from "./styles";
 
 interface TimelineProps {
@@ -9,7 +10,11 @@ function Timeline({ items }: TimelineProps) {
     <TimelineContainer>
       {items.map((item, index) => (
         <>
-          <TimelineItem>{item}</TimelineItem>
+          <TimelineItem
+            key={`${crypto.randomBytes(20).toString("hex")}-${item}`}
+          >
+            {item}
+          </TimelineItem>
           {index !== items.length - 1 && <Connector />}
         </>
       ))}

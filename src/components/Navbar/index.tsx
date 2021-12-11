@@ -14,10 +14,13 @@ function Navbar() {
           <NavItem href="#projects">Projects</NavItem>
           <NavItem href="#contact">Contact</NavItem>
           <NavItem href="#">Blog</NavItem>
-          <NavItem href="https://github.com/ysraelmoreno">
+          <NavItem target="_blank" href="https://github.com/ysraelmoreno">
             <FiGithub />
           </NavItem>
-          <NavItem href="https://www.linkedin.com/in/ysrael-moreno-789877160/">
+          <NavItem
+            target="_blank"
+            href="https://www.linkedin.com/in/ysrael-moreno-789877160/"
+          >
             <FiLinkedin />
           </NavItem>
         </Nav>

@@ -97,6 +97,7 @@ function Tabs({ defaultTab = 0 }: TabsProps) {
           <>
             {data.allProjects.map((repo: any) => (
               <ReposList
+                key={repo.title}
                 title={repo.title}
                 subtitle={repo.subtitle.value}
                 thumbnail={repo.thumbnail.responsiveImage}
@@ -113,6 +114,7 @@ function Tabs({ defaultTab = 0 }: TabsProps) {
         ) : (
           findReactProjects?.map((repo: any) => (
             <ReposList
+              key={repo.title}
               title={repo.title}
               subtitle={repo.subtitle.value}
               thumbnail={repo.thumbnail.responsiveImage}
@@ -128,6 +130,7 @@ function Tabs({ defaultTab = 0 }: TabsProps) {
         ) : (
           findJavascriptProjects?.map((repo: any) => (
             <ReposList
+              key={repo.title}
               title={repo.title}
               subtitle={repo.subtitle.value}
               thumbnail={repo.thumbnail.responsiveImage}

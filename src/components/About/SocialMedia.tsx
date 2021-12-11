@@ -25,7 +25,7 @@ function SocialMedia({ socialMedias }: SocialMediaProps) {
 
   const listOfSocialMedia = listOfSocialMediaLowerCase.map(
     (key: "linkedin" | "github" | "youtube") => (
-      <a target="_blank" rel="noreferrer" href={socialMedias[key]}>
+      <a key={key} target="_blank" rel="noreferrer" href={socialMedias[key]}>
         {socialMediaLinks[key]}
       </a>
     )

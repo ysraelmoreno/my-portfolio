@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import Logo from "../../assets/logo.svg";
 import Navbar from "../Navbar";
 
 import { HeaderContainer, HeaderContent } from "./styles";
@@ -8,18 +7,26 @@ import { HeaderContainer, HeaderContent } from "./styles";
 function Header() {
   const [hasScrolled, setHasScrolled] = useState(false);
 
-  window.addEventListener("scroll", () => {
-    if (window.scrollY >= 40) {
-      setHasScrolled(true);
-    } else {
-      setHasScrolled(false);
+  useEffect(() => {
+    function handleScroll() {
+      if (window.scrollY >= 40) {
+        setHasScrolled(true);
+      } else {
+        setHasScrolled(false);
+      }
     }
-  });
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <HeaderContainer scrolled={hasScrolled}>
       <HeaderContent>
-        <img src={Logo} alt="Logo" />
+        <h1>Ysrael Moreno</h1>
         <Navbar />
       </HeaderContent>
     </HeaderContainer>

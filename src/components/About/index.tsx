@@ -1,75 +1,37 @@
-import { useQuery, gql } from "@apollo/client";
 import { StructuredText, Image } from "react-datocms";
 import {
   AboutContainer,
   ImageContainer,
   TextContainer,
-  Container,
+  MainAboutContainer,
   SocialMediaContainer,
 } from "./styles";
 
-import LoadingText from "./LoadingText";
-import LoadingImage from "./LoadingImage";
 import SocialMedia from "./SocialMedia";
 
-function About() {
-  const ABOUT_QUERY = gql`
-    query MyQuery {
-      aboutText {
-        title
-        subtitle
-        textAbout {
-          value
-        }
-        socialMedia
-        photo {
-          url
-          responsiveImage {
-            src
-            srcSet
-            base64
-            aspectRatio
-            width
-            height
-            sizes
-          }
-        }
-      }
-    }
-  `;
-
-  const { data, loading } = useQuery(ABOUT_QUERY);
-
+function About({ data }: any) {
   return (
-    <Container id="about">
+    <MainAboutContainer id="about">
       <AboutContainer>
         <ImageContainer>
-          {loading ? (
-            <LoadingImage />
-          ) : (
-            <Image data={data.aboutText.photo.responsiveImage} />
-          )}
+          <Image data={data.photo.responsiveImage} />
         </ImageContainer>
         <TextContainer>
-          {loading ? (
-            <LoadingText />
-          ) : (
-            <>
-              <h1>{data.aboutText.title}</h1>
-              <span>{data.aboutText.subtitle}</span>
+          <TextContainer>
+            <h1>{data.title}</h1>
+            <span>{data.subtitle}</span>
 
-              <StructuredText data={data.aboutText.textAbout.value} />
-              <br />
+            <StructuredText data={data.textAbout.value} />
+            <br />
 
-              <h3>Social Media</h3>
-              <SocialMediaContainer>
-                <SocialMedia socialMedias={data.aboutText.socialMedia} />
-              </SocialMediaContainer>
-            </>
-          )}
+            <h3>Social Media</h3>
+            <SocialMediaContainer>
+              <SocialMedia socialMedias={data.socialMedia} />
+            </SocialMediaContainer>
+          </TextContainer>
         </TextContainer>
       </AboutContainer>
-    </Container>
+    </MainAboutContainer>
   );
 }
 

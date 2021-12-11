@@ -11,6 +11,7 @@ export const Container = styled.div`
   picture {
     img {
       object-fit: cover;
+      width: 100%;
     }
   }
 `;

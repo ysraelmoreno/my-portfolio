@@ -1,13 +1,20 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-import HomeBackground from "../../assets/home.jpg";
+interface ContainerProps {
+  backgroundImage: string;
+}
 
-export const Container = styled.section`
+export const Container = styled.section<ContainerProps>`
   width: 100%;
   height: 800px;
   max-height: 800px;
 
-  background-image: url(${HomeBackground});
+  ${(props) =>
+    props.backgroundImage &&
+    css`
+      background-image: url(${props.backgroundImage});
+    `}
+
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -28,6 +35,7 @@ export const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 100%;
+  width: 100%;
   padding: 20px;
   h1 {
     text-shadow: 0px 0px 16px rgba(42, 217, 255, 0.35);
