@@ -1,6 +1,7 @@
 import { AppProps } from "next/app";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { ModalProvider } from "../context/ModalContext";
+import { ScrollProvider } from "../hooks/useScrollTo";
 const auth = `Bearer ${process.env.NEXT_PUBLIC_DATO_TOKEN}`;
 
 const client = new ApolloClient({
@@ -14,10 +15,12 @@ const client = new ApolloClient({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
-      <ModalProvider>
-        <Component {...pageProps} />
-      </ModalProvider>
-    </ApolloProvider> 
+      <ScrollProvider>
+        <ModalProvider>
+          <Component {...pageProps} />
+        </ModalProvider>
+      </ScrollProvider>
+    </ApolloProvider>
   );
 }
 

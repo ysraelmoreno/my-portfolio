@@ -8,10 +8,22 @@ import {
 } from "./styles";
 
 import SocialMedia from "./SocialMedia";
+import { useEffect, useRef } from "react";
+import useScrollTo from "../../hooks/useScrollTo";
 
 function About({ data }: any) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { signRef } = useScrollTo();
+
+  useEffect(() => {
+    if (ref.current) {
+      signRef(ref.current);
+    }
+  }, [ref.current]);
+
   return (
-    <MainAboutContainer id="about">
+    <MainAboutContainer ref={ref} id="about">
       <AboutContainer>
         <ImageContainer>
           <Image data={data.photo.responsiveImage} />

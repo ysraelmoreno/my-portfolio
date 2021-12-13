@@ -7,6 +7,9 @@ import {
   RepoLink,
 } from "./styles";
 
+import { useRef, useEffect } from "react";
+import useScrollTo from "../../hooks/useScrollTo";
+
 function Contact() {
   const SOCIALMEDIA_QUERY = gql`
     query MyQuery {
@@ -18,8 +21,18 @@ function Contact() {
 
   const { data, loading } = useQuery(SOCIALMEDIA_QUERY);
 
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { signRef } = useScrollTo();
+
+  useEffect(() => {
+    if (ref.current) {
+      signRef(ref.current);
+    }
+  }, [ref.current]);
+
   return (
-    <ContactContainer id="contact">
+    <ContactContainer ref={ref} id="contacts">
       <Content>
         {loading ? (
           <div>Loading...</div>
@@ -32,7 +45,7 @@ function Contact() {
             </SocialMediaItems>
 
             <span>
-              This website is made with ReactJS, see the full project on my
+              This website is made with NextJS, see the full project on my
               github
             </span>
             <RepoLink
