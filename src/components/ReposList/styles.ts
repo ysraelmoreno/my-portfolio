@@ -41,6 +41,7 @@ export const Link = styled.a`
   align-items: center;
   justify-content: center;
   align-self: flex-end;
+  text-decoration: none;
   height: 40px;
   width: 200px;
   background-color: transparent;

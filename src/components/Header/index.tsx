@@ -4,10 +4,17 @@ import Navbar from "../Navbar";
 
 import { HeaderContainer, HeaderContent } from "./styles";
 
-function Header() {
+interface HeaderProps {
+  staticMenu?: boolean;
+}
+
+function Header({ staticMenu = false }: HeaderProps) {
   const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
+    if (staticMenu) {
+      return setHasScrolled(true);
+    }
     function handleScroll() {
       if (window.scrollY >= 40) {
         setHasScrolled(true);

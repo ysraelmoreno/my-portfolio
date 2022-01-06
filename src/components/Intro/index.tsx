@@ -4,11 +4,12 @@ import { Container, Content, ContentContainer } from "./styles";
 import Header from "../Header";
 import { useEffect, useRef } from "react";
 import useScrollTo from "../../hooks/useScrollTo";
+import Button from "../Button";
 
 function Intro({ data }: any) {
   const ref = useRef<HTMLDivElement>(null);
 
-  const { signRef } = useScrollTo();
+  const { signRef, scrollTo } = useScrollTo();
 
   useEffect(() => {
     if (ref.current) {
@@ -24,9 +25,9 @@ function Intro({ data }: any) {
           <>
             <h1>{data.title}</h1>
             <StructuredText data={data.subtitle.value.document} />
-            <a href="#projects">
+            <Button onClick={() => scrollTo("projects")}>
               <FiChevronDown /> See my projects
-            </a>
+            </Button>
           </>
         </Content>
       </ContentContainer>

@@ -46,12 +46,13 @@ export const Content = styled.div`
     opacity: 0.7;
   }
 
-  a {
+  button {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 40px;
     background-color: transparent;
+    text-decoration: none;
     border: 1px solid white;
     color: white;
     border-radius: 10px;

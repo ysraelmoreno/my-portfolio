@@ -30,6 +30,7 @@ function NavMobileButton() {
     delay: 0,
     immediate: true,
   });
+
   return (
     <NavMobileButtonContainer
       isOpen={isOpen}

@@ -1,6 +1,7 @@
 import { AppProps } from "next/app";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { ModalProvider } from "../context/ModalContext";
+import GlobalStyles from "../styles/global";
 import { ScrollProvider } from "../hooks/useScrollTo";
 const auth = `Bearer ${process.env.NEXT_PUBLIC_DATO_TOKEN}`;
 
@@ -18,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ScrollProvider>
         <ModalProvider>
           <Component {...pageProps} />
+          <GlobalStyles />
         </ModalProvider>
       </ScrollProvider>
     </ApolloProvider>
