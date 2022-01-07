@@ -185,24 +185,6 @@ export const TagsListContainer = styled.div`
   max-width: 1240px;
   margin: 0 auto;
   width: 100%;
-
-  ul {
-    display: flex;
-    flex-direction: row;
-
-    li {
-      list-style: none;
-      padding: 10px 20px;
-      color: #333;
-      display: flex;
-      align-items: center;
-
-      span {
-        margin-left: 10px;
-        opacity: 0.3;
-      }
-    }
-  }
 `;
 
 export const PostList = styled.div`
