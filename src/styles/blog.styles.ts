@@ -9,6 +9,10 @@ interface PostProps {
 }
 
 export const Container = styled.div`
+  body {
+    color: #fff !important;
+  }
+
   display: flex;
   flex-direction: column;
   background-color: #fff;
@@ -193,6 +197,7 @@ export const PostList = styled.div`
   max-width: 1240px;
   margin: 0 auto;
   padding: 10px;
+  height: 100%;
 `;
 
 export const Post = styled.div<PostProps>`

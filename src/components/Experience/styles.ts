@@ -29,3 +29,10 @@ export const WorkExperienceInfo = styled.div`
     opacity: 0.5;
   }
 `;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #101010;
+`;

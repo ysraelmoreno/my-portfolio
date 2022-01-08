@@ -11,14 +11,13 @@ import {
   TagsListContainer,
   TextContainer,
   ThirdPostContainer,
-} from "../styles/blog.styles";
-import Header from "../components/Header";
-import TagsList from "../components/TagsList";
-import TagsItem from "../components/TagsList/TagsItem";
+} from "../../styles/blog.styles";
+import Header from "../../components/Header";
+import TagsList from "../../components/TagsList";
+import TagsItem from "../../components/TagsList/TagsItem";
 import { GetServerSideProps } from "next";
-import { api } from "../api/api";
-import { ResponsiveImageType, StructuredTextPropTypes } from "react-datocms";
-import { useEffect, useMemo } from "react";
+import { api } from "../../api/api";
+import { useMemo } from "react";
 
 interface Post {
   id: string;
@@ -131,14 +130,20 @@ function Blog({ posts }: BlogProps) {
             </TagsList>
           </TagsListContainer>
           <PostList>
-            {featuredPosts.map((post) => (
-              <Post image={post.image}>
-                <div>
-                  <h1>{post.title}</h1>
-                  <p>{post.description}</p>
-                </div>
-              </Post>
-            ))}
+            {posts.map((post, index) => {
+              if (index < 3) {
+                return <></>;
+              }
+
+              return (
+                <Post image={post.thumbnail.url}>
+                  <div>
+                    <h1>{post.title}</h1>
+                    <p>{post.subtitle}</p>
+                  </div>
+                </Post>
+              );
+            })}
           </PostList>
         </PostsContainer>
       </Container>
