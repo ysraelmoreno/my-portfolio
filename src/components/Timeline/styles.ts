@@ -19,6 +19,7 @@ export const TimelineItem = styled.div`
   max-width: 90px;
   width: 100%;
   display: flex;
+  color: #b1b1b1;
   justify-content: center;
   align-items: center;
 `;

@@ -13,6 +13,7 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
   width: 100vw;
   z-index: 9999;
   transition: all 0.3s ease-in-out;
+
   img {
     width: 20%;
     min-width: 200px;
@@ -35,7 +36,10 @@ export const HeaderContent = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  h1 {
+  > a {
+    text-decoration: none;
     color: white;
+    font-weight: bold;
+    font-size: 2rem;
   }
 `;

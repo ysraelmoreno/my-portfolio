@@ -33,7 +33,7 @@ function Header({ staticMenu = false }: HeaderProps) {
   return (
     <HeaderContainer scrolled={hasScrolled}>
       <HeaderContent>
-        <h1>Ysrael Moreno</h1>
+        <a href="/">Ysrael Moreno</a>
         <Navbar />
       </HeaderContent>
     </HeaderContainer>

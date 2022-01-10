@@ -49,7 +49,7 @@ export const ScrollProvider = ({ children }: ScrollProviderProps) => {
 
       if (findElement) {
         window.scrollTo({
-          top: findElement.ref.offsetTop ?? 0,
+          top: findElement.ref.offsetTop - 3 ?? 0,
           left: findElement?.ref.offsetLeft ?? 0,
           behavior: "smooth",
         });

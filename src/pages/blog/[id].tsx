@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import { api } from "../../api/api";
-import { StructuredText, StructuredTextGraphQlResponse } from "react-datocms";
+import { StructuredTextGraphQlResponse } from "react-datocms";
+import { FiCalendar } from "react-icons/fi";
 import {
   Container,
   HeaderContainer,
@@ -8,9 +9,12 @@ import {
   Tag,
   TagsListContainer,
   PostContentContainer,
+  FooterContainer,
 } from "../../styles/post.styles";
 import Header from "../../components/Header";
 import Head from "next/head";
+import PostContent from "../../components/PostContent";
+import Footer from "../../components/Footer";
 interface Post {
   id: string;
   title: string;
@@ -56,7 +60,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 function Post({ post }: PostProps) {
-  console.log(post);
   return (
     <>
       <Head>
@@ -72,15 +75,23 @@ function Post({ post }: PostProps) {
               ))}
             </TagsListContainer>
             <h1>{post.title}</h1>
-            <h5>{post.subtitle}</h5>
+            {post.subtitle && <h5>{post.subtitle}</h5>}
+            <br />
+            <span>
+              <FiCalendar />
+              {new Intl.DateTimeFormat("pt-BR").format(
+                new Date(post.createdAt)
+              )}
+            </span>
           </HeaderContent>
         </HeaderContainer>
       </Container>
       <Container>
-        <PostContentContainer>
-          <StructuredText data={post.content.value} />
-        </PostContentContainer>
+        <PostContent data={post.content} />
       </Container>
+      <FooterContainer>
+        <Footer />
+      </FooterContainer>
     </>
   );
 }

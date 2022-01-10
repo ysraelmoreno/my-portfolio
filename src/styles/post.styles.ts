@@ -4,6 +4,13 @@ interface PostHeaderProps {
   image: string;
 }
 
+export const FooterContainer = styled.footer`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #101010;
+`;
+
 export const Container = styled.div`
   display: flex;
 
@@ -56,6 +63,16 @@ export const HeaderContent = styled.div`
     color: #fff;
     font-weight: 500;
   }
+
+  span {
+    svg {
+      margin-right: 10px;
+    }
+    color: #fff;
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const TagsListContainer = styled.div`
@@ -85,7 +102,6 @@ export const Tag = styled.span`
 export const PostContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 50px auto;
   max-width: 1240px;
   width: 100%;
 

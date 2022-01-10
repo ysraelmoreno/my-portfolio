@@ -17,8 +17,8 @@ function Menu() {
   return (
     <>
       <NavItem onClick={() => handleScrollTo("home")}>Home</NavItem>
-      <NavItem onClick={() => handleScrollTo("about")}>About</NavItem>
       <NavItem onClick={() => handleScrollTo("projects")}>Projects</NavItem>
+      <NavItem onClick={() => handleScrollTo("about")}>About</NavItem>
       <NavItem onClick={() => handleScrollTo("contacts")}>Contact</NavItem>
       <Link href="/blog" passHref>
         <NavItem>Blog</NavItem>
