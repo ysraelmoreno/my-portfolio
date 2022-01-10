@@ -15,7 +15,6 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
     <>
       <Head>
         <title>Ysrael Moreno - Home</title>
-        <link rel="icon" href="/assets/YM.svg" />
       </Head>
       <div>
         <Intro data={data.intropage} />

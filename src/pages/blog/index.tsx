@@ -18,11 +18,13 @@ import TagsItem from "../../components/TagsList/TagsItem";
 import { GetServerSideProps } from "next";
 import { api } from "../../api/api";
 import { useMemo } from "react";
+import Head from "next/head";
 
 interface Post {
   id: string;
   title: string;
   subtitle: string;
+  tags: string[];
   thumbnail: {
     url: string;
   };
@@ -67,18 +69,22 @@ function Blog({ posts }: BlogProps) {
 
   return (
     <>
+      <Head>
+        <title>Blog | Ysrael Moreno</title>
+      </Head>
       <Container>
         <HeaderContainer>
           <Header staticMenu />
         </HeaderContainer>
         <FeaturedPostsContainer>
           {posts[0] && (
-            <FirstPostContainer image={posts[0].thumbnail.url}>
+            <FirstPostContainer
+              href={`/blog/${posts[0].id}`}
+              image={posts[0].thumbnail.url}
+            >
               <TagsContainer>
-                {featuredPosts[0].tags.map((tag) => (
-                  <span key={tag}>
-                    {tag[0].toUpperCase() + tag.substring(1)}
-                  </span>
+                {posts[0].tags?.map((tag) => (
+                  <span>{tag}</span>
                 ))}
               </TagsContainer>
               <TextContainer>
@@ -88,12 +94,14 @@ function Blog({ posts }: BlogProps) {
             </FirstPostContainer>
           )}
           {posts[1] && (
-            <SecondPostContainer image={posts[1].thumbnail.url}>
+            <SecondPostContainer
+              href={`/blog/${posts[1].id}`}
+              image={posts[1].thumbnail.url}
+            >
               <TagsContainer>
-                <span>
-                  {featuredPosts[1].tags[0][0].toUpperCase() +
-                    featuredPosts[1].tags[0].substring(1)}
-                </span>
+                {posts[1].tags?.map((tag) => (
+                  <span>{tag}</span>
+                ))}
               </TagsContainer>
               <TextContainer>
                 <h4>{posts[1].title}</h4>
@@ -102,12 +110,14 @@ function Blog({ posts }: BlogProps) {
             </SecondPostContainer>
           )}
           {posts[2] && (
-            <ThirdPostContainer image={posts[2].thumbnail.url}>
+            <ThirdPostContainer
+              href={`/blog/${posts[2].id}`}
+              image={posts[2].thumbnail.url}
+            >
               <TagsContainer>
-                <span>
-                  {featuredPosts[1].tags[0][0].toUpperCase() +
-                    featuredPosts[1].tags[0].substring(1)}
-                </span>
+                {posts[2].tags?.map((tag) => (
+                  <span>{tag}</span>
+                ))}
               </TagsContainer>
               <TextContainer>
                 <h4>{posts[2].title}</h4>
@@ -119,32 +129,38 @@ function Blog({ posts }: BlogProps) {
       </Container>
       <Container>
         <PostsContainer>
-          <TagsListContainer>
-            <TagsList>
-              <TagsItem counter={allPostsQuantity} tag="all">
-                All Posts
-              </TagsItem>
-              <TagsItem tag="react">React</TagsItem>
-              <TagsItem tag="nextjs">NextJS</TagsItem>
-              <TagsItem tag="programming">Programming</TagsItem>
-            </TagsList>
-          </TagsListContainer>
-          <PostList>
-            {posts.map((post, index) => {
-              if (index < 3) {
-                return <></>;
-              }
+          {posts.length <= 3 || posts.length <= 0 ? (
+            <p>No more posts to show</p>
+          ) : (
+            <>
+              <TagsListContainer>
+                <TagsList>
+                  <TagsItem counter={allPostsQuantity} tag="all">
+                    All Posts
+                  </TagsItem>
+                  <TagsItem tag="react">React</TagsItem>
+                  <TagsItem tag="nextjs">NextJS</TagsItem>
+                  <TagsItem tag="programming">Programming</TagsItem>
+                </TagsList>
+              </TagsListContainer>
+              <PostList>
+                {posts.map((post, index) => {
+                  if (index < 3) {
+                    return <></>;
+                  }
 
-              return (
-                <Post image={post.thumbnail.url}>
-                  <div>
-                    <h1>{post.title}</h1>
-                    <p>{post.subtitle}</p>
-                  </div>
-                </Post>
-              );
-            })}
-          </PostList>
+                  return (
+                    <Post image={post.thumbnail.url}>
+                      <div>
+                        <h1>{post.title}</h1>
+                        <p>{post.subtitle}</p>
+                      </div>
+                    </Post>
+                  );
+                })}
+              </PostList>
+            </>
+          )}
         </PostsContainer>
       </Container>
     </>
@@ -156,6 +172,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     query: `query MyQuery {
       allPosts {
         id
+        tags
         thumbnail {
           url
         }
@@ -166,6 +183,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         }
       }
     }
+
     `,
   });
 

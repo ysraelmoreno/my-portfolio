@@ -34,6 +34,7 @@ export const SubTitle = styled.h2`
   font-weight: 400;
   margin-top: 20px;
   opacity: 0.7;
+  color: white;
 `;
 
 export const Link = styled.a`

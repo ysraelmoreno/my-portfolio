@@ -69,7 +69,7 @@ export const TextContainer = styled.div`
   }
 `;
 
-export const FirstPostContainer = styled.div<FirstPostProps>`
+export const FeaturedPostContainer = styled.a`
   background-color: #000;
   position: relative;
   max-width: 770px;
@@ -77,11 +77,20 @@ export const FirstPostContainer = styled.div<FirstPostProps>`
   width: 100%;
   padding: 0px;
   border-radius: 10px;
-
-  grid-area: 1 / 1 / 6 / 3;
+  text-decoration: none;
+  color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+export const FirstPostContainer = styled(FeaturedPostContainer)<FirstPostProps>`
+  grid-area: 1 / 1 / 6 / 3;
 
   @media (max-width: 768px) {
     grid-area: 1 / 1 / 3 / 5;
@@ -101,23 +110,7 @@ export const FirstPostContainer = styled.div<FirstPostProps>`
   }
 `;
 
-export const PostsContainer = styled.div`
-  max-width: 1240px;
-  margin: 0 auto;
-  background-color: #fff;
-  width: 100%;
-  margin-top: 50px;
-`;
-
-export const SecondPostContainer = styled.div<FirstPostProps>`
-  background-color: #000;
-  position: relative;
-  width: 100%;
-  padding: 0px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+export const SecondPostContainer = styled(FeaturedPostContainer)<PostProps>`
   grid-area: 1 / 3 / 3 / 5;
 
   p {
@@ -146,15 +139,7 @@ export const SecondPostContainer = styled.div<FirstPostProps>`
   }
 `;
 
-export const ThirdPostContainer = styled.div<FirstPostProps>`
-  background-color: #000;
-  position: relative;
-  width: 100%;
-  padding: 0px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+export const ThirdPostContainer = styled(FeaturedPostContainer)<FirstPostProps>`
   grid-area: 3 / 3 / 6 / 5;
 
   @media (max-width: 768px) {
@@ -180,6 +165,20 @@ export const ThirdPostContainer = styled.div<FirstPostProps>`
 
     background-image: url(${(props) => props.image});
     height: 100%;
+  }
+`;
+
+export const PostsContainer = styled.div`
+  max-width: 1240px;
+  margin: 0 auto;
+  background-color: #fff;
+  width: 100%;
+  margin-top: 50px;
+
+  > p {
+    color: #101010;
+    text-align: center;
+    opacity: 0.5;
   }
 `;
 

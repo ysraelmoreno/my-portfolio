@@ -9,7 +9,7 @@ export default createGlobalStyle`
 
   body {
     background-color: #fff;
-    color: white;
+    color: #101010;
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
   }
