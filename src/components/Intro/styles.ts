@@ -37,21 +37,26 @@ export const Content = styled.div`
   height: 100%;
   width: 100%;
   padding: 20px;
+
   h1 {
     text-shadow: 0px 0px 16px rgba(42, 217, 255, 0.35);
     font-size: 36px;
+  color: #fff;
+
   }
 
   p {
+  color: #fff;
     opacity: 0.7;
   }
 
-  a {
+  button {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 40px;
     background-color: transparent;
+    text-decoration: none;
     border: 1px solid white;
     color: white;
     border-radius: 10px;

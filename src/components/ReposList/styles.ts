@@ -22,6 +22,7 @@ export const InfoContainer = styled.div`
   margin-top: 30px;
   margin-left: 10px;
   width: 100%;
+  color: white;
 `;
 
 export const Title = styled.h1`
@@ -41,6 +42,7 @@ export const Link = styled.a`
   align-items: center;
   justify-content: center;
   align-self: flex-end;
+  text-decoration: none;
   height: 40px;
   width: 200px;
   background-color: transparent;

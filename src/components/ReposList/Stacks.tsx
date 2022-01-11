@@ -3,7 +3,11 @@ import Icon from "../Icon";
 import { IconContainer } from "./styles";
 import { StacksProps } from "./types";
 
-function ShowStacks({ stacks }: StacksProps): JSX.Element {
+function ListOfStacks({
+  stack,
+}: {
+  stack: "javascript" | "typescript" | "reactjs" | "html";
+}) {
   const listOfStacks = {
     javascript: <Icon icon={SiJavascript} />,
     typescript: <Icon icon={SiTypescript} />,
@@ -11,21 +15,28 @@ function ShowStacks({ stacks }: StacksProps): JSX.Element {
     html: <Icon icon={SiHtml5} />,
   };
 
-  const stacksToLowerCase = (stack: string): string => {
-    return String(stack).toLowerCase();
-  };
+  return listOfStacks[stack];
+}
+
+const stacksToLowerCase = (
+  stack: string
+): "javascript" | "typescript" | "reactjs" | "html" => {
+  return String(stack).toLowerCase() as
+    | "javascript"
+    | "typescript"
+    | "reactjs"
+    | "html";
+};
+
+function ShowStacks({ stacks }: StacksProps): JSX.Element {
   return (
     <IconContainer>
-      {stacks.map(
-        (stack) =>
-          listOfStacks[
-            stacksToLowerCase(stack) as
-              | "javascript"
-              | "typescript"
-              | "reactjs"
-              | "html"
-          ]
-      )}
+      {stacks.map((stack) => (
+        <ListOfStacks
+          key={stacksToLowerCase(stack)}
+          stack={stacksToLowerCase(stack)}
+        />
+      ))}
     </IconContainer>
   );
 }

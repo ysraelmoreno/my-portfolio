@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import useScrollTo from "../../hooks/useScrollTo";
 import Tabs from "../Tabs";
-import { ProjectsContainer, ShowProjectsContainer } from "./styles";
+import { ProjectsContainer, ShowProjectsContainer, Wrapper } from "./styles";
 
 function Projects() {
   const { signRef } = useScrollTo();
@@ -15,12 +15,14 @@ function Projects() {
   }, [ref.current]);
 
   return (
-    <ProjectsContainer ref={ref} id="projects">
-      <h1>PROJECTS</h1>
-      <ShowProjectsContainer>
-        <Tabs />
-      </ShowProjectsContainer>
-    </ProjectsContainer>
+    <Wrapper>
+      <ProjectsContainer ref={ref} id="projects">
+        <h1>PROJECTS</h1>
+        <ShowProjectsContainer>
+          <Tabs />
+        </ShowProjectsContainer>
+      </ProjectsContainer>
+    </Wrapper>
   );
 }
 

@@ -4,6 +4,7 @@ export const TimelineContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 1240px;
   margin: 0 20px;
   align-items: center;
 `;
@@ -18,6 +19,7 @@ export const TimelineItem = styled.div`
   max-width: 90px;
   width: 100%;
   display: flex;
+  color: #b1b1b1;
   justify-content: center;
   align-items: center;
 `;

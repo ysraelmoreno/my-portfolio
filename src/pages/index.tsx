@@ -1,35 +1,44 @@
-import { InferGetStaticPropsType } from "next";
-import Contact from "../components/Contact";
+import dynamic from "next/dynamic";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 
-import Experience from "../components/Experience";
+const DynamicExperience = dynamic(() => import("../components/Experience"));
+const DynamicContact = dynamic(() => import("../components/Contact"));
+const DynamicAbout = dynamic(() => import("../components/About"));
 import Projects from "../components/Projects";
-import GlobalStyles from "../styles/global";
 import Intro from "../components/Intro";
 
 import { api } from "../api/api";
-import About from "../components/About";
 import Head from "next/head";
-
+import useScrollTo from "../hooks/useScrollTo";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { scrollTo } = useScrollTo();
+  const { query } = useRouter();
+
+  useEffect(() => {
+    if (query.scroll) {
+      scrollTo(query.scroll as string);
+    }
+  }, [query]);
+
   return (
     <>
       <Head>
         <title>Ysrael Moreno - Home</title>
-        <link rel="icon" href="/assets/YM.svg" />
       </Head>
       <div>
         <Intro data={data.intropage} />
         <Projects />
-        <About data={data.aboutText} />
-        <Experience />
-        <Contact />
+        <DynamicAbout data={data.aboutText} />
+        <DynamicExperience />
+        <DynamicContact />
       </div>
-      <GlobalStyles />
     </>
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const { data } = await api.post("", {
     query: `
       query MyQuery {
@@ -67,7 +76,8 @@ export async function getStaticProps() {
     props: {
       data: data.data,
     },
+    revalidate: 1000,
   };
-}
+};
 
 export default Home;
