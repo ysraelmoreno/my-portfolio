@@ -48,28 +48,40 @@ export const TagsContainer = styled.div`
   z-index: 99;
   padding: 20px;
 
-  span {
+  a {
+    font-size: 11px;
+    opacity: 0.5;
+    color: #fff;
+    text-decoration: none;
     padding: 10px 20px;
     border: 1px solid #fff;
     border-radius: 100px;
     display: flex;
     align-items: center;
     margin-right: 20px;
+
+    transition: all 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 `;
 
-export const TextContainer = styled.div`
+export const TextContainer = styled.a`
   display: flex;
   flex-direction: column;
   z-index: 99;
   padding: 40px 20px;
+  text-decoration: none;
+  color: white;
 
   p {
     opacity: 0.5;
   }
 `;
 
-export const FeaturedPostContainer = styled.a`
+export const FeaturedPostContainer = styled.div`
   background-color: #000;
   position: relative;
   max-width: 770px;
@@ -83,10 +95,6 @@ export const FeaturedPostContainer = styled.a`
   flex-direction: column;
   justify-content: space-between;
   transition: all 0.3s ease-in-out;
-
-  &:hover {
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
-  }
 `;
 
 export const FirstPostContainer = styled(FeaturedPostContainer)<FirstPostProps>`

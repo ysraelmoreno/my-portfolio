@@ -30,10 +30,12 @@ export const EasterEggsProvider = ({ children }: EasterEggsProviderProps) => {
     const keyListener = (event: KeyboardEvent) => {
       const key = event.key.toLowerCase();
 
-      console.log(key);
-
       if (keys.length >= 3) {
         setKeys([]);
+      }
+
+      if (isShowingEgg) {
+        return;
       }
 
       if (event.shiftKey && key === "@") {

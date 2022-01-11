@@ -9,8 +9,19 @@ import Intro from "../components/Intro";
 
 import { api } from "../api/api";
 import Head from "next/head";
-
+import useScrollTo from "../hooks/useScrollTo";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { scrollTo } = useScrollTo();
+  const { query } = useRouter();
+
+  useEffect(() => {
+    if (query.scroll) {
+      scrollTo(query.scroll as string);
+    }
+  }, [query]);
+
   return (
     <>
       <Head>

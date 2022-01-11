@@ -64,6 +64,14 @@ export const HeaderContent = styled.div`
     font-weight: 500;
   }
 
+  hr {
+    width: 30%;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    opacity: 0.3;
+    border: 1px solid #fff;
+  }
+
   span {
     svg {
       margin-right: 10px;
@@ -73,6 +81,11 @@ export const HeaderContent = styled.div`
     display: flex;
     align-items: center;
   }
+`;
+
+export const InfoDataContainer = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 export const TagsListContainer = styled.div`

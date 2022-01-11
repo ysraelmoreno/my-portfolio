@@ -8,7 +8,7 @@ function Menu() {
 
   const handleScrollTo = (section: string) => {
     if (window.location.pathname !== "/") {
-      window.location.href = "/";
+      window.location.href = `/?scroll=${section}`;
     }
 
     scrollTo(section);

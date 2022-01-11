@@ -6,15 +6,17 @@ import {
   Container,
   HeaderContainer,
   HeaderContent,
-  Tag,
   TagsListContainer,
   PostContentContainer,
   FooterContainer,
+  InfoDataContainer,
 } from "../../styles/post.styles";
 import Header from "../../components/Header";
 import Head from "next/head";
-import PostContent from "../../components/PostContent";
+import Content from "../../components/Post/Content";
+import Tag from "../../components/Post/Tag";
 import Footer from "../../components/Footer";
+
 interface Post {
   id: string;
   title: string;
@@ -33,6 +35,7 @@ interface PostProps {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
+
   const posts = await api.post("", {
     query: `query MyQuery {
       post(filter: {id: {eq: ${id}}}) {
@@ -71,23 +74,27 @@ function Post({ post }: PostProps) {
           <HeaderContent>
             <TagsListContainer>
               {post.tags?.map((tag) => (
-                <Tag>{tag}</Tag>
+                <Tag href={`/blog?tag=${tag}`}>
+                  {tag.charAt(0).toUpperCase() + tag.substring(1)}
+                </Tag>
               ))}
             </TagsListContainer>
             <h1>{post.title}</h1>
             {post.subtitle && <h5>{post.subtitle}</h5>}
-            <br />
-            <span>
-              <FiCalendar />
-              {new Intl.DateTimeFormat("pt-BR").format(
-                new Date(post.createdAt)
-              )}
-            </span>
+            <hr />
+            <InfoDataContainer>
+              <span>
+                <FiCalendar />
+                {new Intl.DateTimeFormat("pt-BR").format(
+                  new Date(post.createdAt)
+                )}
+              </span>
+            </InfoDataContainer>
           </HeaderContent>
         </HeaderContainer>
       </Container>
       <Container>
-        <PostContent data={post.content} />
+        <Content data={post.content} />
       </Container>
       <FooterContainer>
         <Footer />

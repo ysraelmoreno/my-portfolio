@@ -19,6 +19,7 @@ import { GetServerSideProps } from "next";
 import { api } from "../../api/api";
 import { useMemo } from "react";
 import Head from "next/head";
+import Tag from "../../components/Post/Tag";
 
 interface Post {
   id: string;
@@ -34,33 +35,6 @@ interface Post {
 interface BlogProps {
   posts: Post[];
 }
-
-const featuredPosts = [
-  {
-    id: 1,
-    title: "How to use styled-components",
-    tags: ["programming", "reactjs", "css"],
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget cursus augue. Nullam sem ipsum, commodo eget convallis eu, vulputate pretium enim. In quis turpis libero.",
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    id: 2,
-    title: "How to use NextJS",
-    tags: ["programming", "reactjs", "nextjs"],
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget cursus augue. Nullam sem ipsum, commodo eget convallis eu, vulputate pretium enim. In quis turpis libero.",
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    id: 3,
-    title: "How to use ReactJS",
-    tags: ["programming", "reactjs", "javascript"],
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget cursus augue. Nullam sem ipsum, commodo eget convallis eu, vulputate pretium enim. In quis turpis libero.",
-    image: "https://source.unsplash.com/random",
-  },
-];
 
 function Blog({ posts }: BlogProps) {
   const allPostsQuantity = useMemo(() => {
@@ -78,48 +52,45 @@ function Blog({ posts }: BlogProps) {
         </HeaderContainer>
         <FeaturedPostsContainer>
           {posts[0] && (
-            <FirstPostContainer
-              href={`/blog/${posts[0].id}`}
-              image={posts[0].thumbnail.url}
-            >
+            <FirstPostContainer image={posts[0].thumbnail.url}>
               <TagsContainer>
                 {posts[0].tags?.map((tag) => (
-                  <span>{tag}</span>
+                  <a href={`/blog?tag=${tag}`}>
+                    {tag.charAt(0).toUpperCase() + tag.substring(1)}
+                  </a>
                 ))}
               </TagsContainer>
-              <TextContainer>
+              <TextContainer href={`/blog/${posts[0].id}`}>
                 <h2>{posts[0].title}</h2>
                 <p>{posts[0].subtitle}</p>
               </TextContainer>
             </FirstPostContainer>
           )}
           {posts[1] && (
-            <SecondPostContainer
-              href={`/blog/${posts[1].id}`}
-              image={posts[1].thumbnail.url}
-            >
+            <SecondPostContainer image={posts[1].thumbnail.url}>
               <TagsContainer>
                 {posts[1].tags?.map((tag) => (
-                  <span>{tag}</span>
+                  <a href={`/blog?tag=${tag}`}>
+                    {tag.charAt(0).toUpperCase() + tag.substring(1)}
+                  </a>
                 ))}
               </TagsContainer>
-              <TextContainer>
+              <TextContainer href={`/blog/${posts[1].id}`}>
                 <h4>{posts[1].title}</h4>
                 <p>{posts[1].subtitle}</p>
               </TextContainer>
             </SecondPostContainer>
           )}
           {posts[2] && (
-            <ThirdPostContainer
-              href={`/blog/${posts[2].id}`}
-              image={posts[2].thumbnail.url}
-            >
+            <ThirdPostContainer image={posts[2].thumbnail.url}>
               <TagsContainer>
                 {posts[2].tags?.map((tag) => (
-                  <span>{tag}</span>
+                  <Tag href={`/blog?tag=${tag}`}>
+                    {tag.charAt(0).toUpperCase() + tag.substring(1)}
+                  </Tag>
                 ))}
               </TagsContainer>
-              <TextContainer>
+              <TextContainer href={`/blog/${posts[2].id}`}>
                 <h4>{posts[2].title}</h4>
                 <p>{posts[2].subtitle}</p>
               </TextContainer>
