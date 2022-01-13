@@ -14,14 +14,14 @@ function R2() {
   });
 
   useEffect(() => {
-    const sound = new Audio("assets/processing-r2d2.mp3");
+    const sound = new Audio("/assets/processing-r2d2.mp3");
     sound.play();
     sound.volume = 0.1;
   }, [isShowingEgg]);
 
   return (
     <>
-      <AnimatedImage src="assets/r2.png" style={props} />
+      <AnimatedImage src="/assets/r2.png" style={props} />
     </>
   );
 }

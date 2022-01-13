@@ -5,6 +5,7 @@ import GlobalStyles from "../styles/global";
 import { ScrollProvider } from "../hooks/useScrollTo";
 import { EasterEggsProvider } from "../context/EasterEggsContext";
 import EasterEgg from "../components/EasterEgg";
+import { ToastProvider } from "../components/Toast/ToastContext";
 const auth = `Bearer ${process.env.NEXT_PUBLIC_DATO_TOKEN}`;
 
 const client = new ApolloClient({
@@ -20,11 +21,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ApolloProvider client={client}>
       <ScrollProvider>
         <ModalProvider>
-          <EasterEggsProvider>
-            <Component {...pageProps} />
-            {EasterEgg && <EasterEgg />}
-            <GlobalStyles />
-          </EasterEggsProvider>
+          <ToastProvider>
+            <EasterEggsProvider>
+              <Component {...pageProps} />
+              {EasterEgg && <EasterEgg />}
+              <GlobalStyles />
+            </EasterEggsProvider>
+          </ToastProvider>
         </ModalProvider>
       </ScrollProvider>
     </ApolloProvider>

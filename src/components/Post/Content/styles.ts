@@ -24,4 +24,8 @@ export const ContentContainer = styled.section`
     background-color: #f5f5f5;
     padding: 20px;
   }
+
+  ul {
+    margin: 20px;
+  }
 `;

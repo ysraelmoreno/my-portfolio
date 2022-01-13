@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useToast } from "../components/Toast/ToastContext";
 
 export interface EasterEgg {
   R2: boolean;
@@ -25,6 +26,7 @@ export const EasterEggsProvider = ({ children }: EasterEggsProviderProps) => {
   const [easterEgg, setEasterEgg] = useState<"R2" | "xWing">(
     "" as "R2" | "xWing"
   );
+  const { addToast } = useToast();
 
   useEffect(() => {
     const keyListener = (event: KeyboardEvent) => {
@@ -57,6 +59,16 @@ export const EasterEggsProvider = ({ children }: EasterEggsProviderProps) => {
       window.removeEventListener("keydown", keyListener);
     };
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      addToast({
+        message: "Press Shift + 2 to see a surprise",
+        description: "You can see a nice easter egg!",
+        type: "info",
+      });
+    }, 10000);
+  }, [addToast]);
 
   return (
     <EasterEggsContext.Provider

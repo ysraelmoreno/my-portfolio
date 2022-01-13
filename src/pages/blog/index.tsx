@@ -141,21 +141,20 @@ function Blog({ posts }: BlogProps) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const posts = await api.post("", {
     query: `query MyQuery {
-      allPosts {
-        id
-        tags
-        thumbnail {
-          url
-        }
-        title
-        subtitle
-        content {
-          value
+        allPosts {
+          id
+          tags
+          thumbnail {
+            url
+          }
+          title
+          subtitle
+          content {
+            value
+          }
         }
       }
-    }
-
-    `,
+      `,
   });
 
   return {
