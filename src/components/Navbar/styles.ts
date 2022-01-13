@@ -155,6 +155,11 @@ export const ModalNavbar = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+
   a {
     color: black;
     margin: 10px 0;

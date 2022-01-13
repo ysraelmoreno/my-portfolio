@@ -18,13 +18,10 @@ export const Container = styled.div<ContainerProps>`
   right: 0;
   transition: all 0.2s ease;
 
-  @media (max-width: 1024px) {
-    display: block;
-  }
-
   ${(props) =>
     props.open &&
     css`
+      display: block;
       transform: translateX(0);
     `}
 `;
