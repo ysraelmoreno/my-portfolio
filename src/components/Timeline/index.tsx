@@ -15,9 +15,7 @@ function Timeline({ items }: TimelineProps) {
           >
             {item}
           </TimelineItem>
-          {index !== items.length - 1 && (
-            <Connector key={`${crypto.randomBytes(20).toString("hex")}`} />
-          )}
+          {index !== items.length - 1 && <Connector />}
         </>
       ))}
     </TimelineContainer>

@@ -6,6 +6,7 @@ import { ScrollProvider } from "../hooks/useScrollTo";
 import { EasterEggsProvider } from "../context/EasterEggsContext";
 import EasterEgg from "../components/EasterEgg";
 import { ToastProvider } from "../components/Toast/ToastContext";
+
 const auth = `Bearer ${process.env.NEXT_PUBLIC_DATO_TOKEN}`;
 
 const client = new ApolloClient({
@@ -16,7 +17,7 @@ const client = new ApolloClient({
   },
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
       <ScrollProvider>
@@ -33,5 +34,3 @@ function MyApp({ Component, pageProps }: AppProps) {
     </ApolloProvider>
   );
 }
-
-export default MyApp;

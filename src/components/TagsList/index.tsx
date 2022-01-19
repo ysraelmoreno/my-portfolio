@@ -1,9 +1,15 @@
 import { TagsListContainer } from "./styles";
 import TagsItem, { TagsItemProps } from "./TagsItem";
-import { TagsProvider, useTags } from "./TagsProvider";
+import { TagsProvider } from "./TagsProvider";
+
+interface TagsItemChildrenProps {
+  children: {
+    props: TagsItemProps;
+  };
+}
 
 interface TagsListProps {
-  children: React.ReactElement<TagsItemProps>[];
+  children: React.ReactElement<TagsItemChildrenProps>[];
 }
 
 function TagsList({ children }: TagsListProps) {
@@ -15,17 +21,15 @@ function TagsList({ children }: TagsListProps) {
 }
 
 function TagsListWrapper({ children }: TagsListProps) {
-  const {} = useTags();
   return (
     <TagsListContainer>
       {children &&
         children.map((item) => (
           <TagsItem
-            {...item.props}
-            key={`tag-${item.props.tag}`}
-            tag={item.props.tag}
+            key={item.props.children?.props.tag}
+            {...item.props.children.props}
           >
-            {item.props.children}
+            {item.props.children.props.children}
           </TagsItem>
         ))}
     </TagsListContainer>

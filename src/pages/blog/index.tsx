@@ -20,8 +20,9 @@ import { api } from "../../api/api";
 import { useMemo } from "react";
 import Head from "next/head";
 import Tag from "../../components/Post/Tag";
+import { AxiosResponse } from "axios";
 
-interface Post {
+interface IPost {
   id: string;
   title: string;
   subtitle: string;
@@ -33,12 +34,64 @@ interface Post {
 }
 
 interface BlogProps {
-  posts: Post[];
+  posts: IPost[];
 }
+
+interface APIResponse {
+  data: {
+    allPosts: IPost[];
+  };
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const {
+    data: {
+      data: { allPosts: posts },
+    },
+  }: AxiosResponse<APIResponse> = await api.post("", {
+    query: `query MyQuery {
+        allPosts {
+          id
+          tags
+          thumbnail {
+            url
+          }
+          title
+          subtitle
+          content {
+            value
+          }
+        }
+      }
+      `,
+  });
+
+  return {
+    props: {
+      posts,
+    },
+  };
+};
 
 function Blog({ posts }: BlogProps) {
   const allPostsQuantity = useMemo(() => {
     return posts.length;
+  }, []);
+
+  const allTags = useMemo(() => {
+    let tags: string[] = [];
+
+    posts.flatMap((post) => {
+      post.tags?.forEach((tag) => {
+        if (tags.includes(tag)) {
+          return;
+        }
+
+        tags.push(tag);
+      });
+    });
+
+    return tags;
   }, []);
 
   return (
@@ -106,26 +159,29 @@ function Blog({ posts }: BlogProps) {
             <>
               <TagsListContainer>
                 <TagsList>
-                  <TagsItem counter={allPostsQuantity} tag="all">
-                    All Posts
-                  </TagsItem>
-                  <TagsItem tag="react">React</TagsItem>
-                  <TagsItem tag="nextjs">NextJS</TagsItem>
-                  <TagsItem tag="programming">Programming</TagsItem>
+                  {allTags.map((tag) => (
+                    <>
+                      {tag && (
+                        <TagsItem tag={tag}>
+                          {tag.charAt(0).toUpperCase() + tag.substring(1)}
+                        </TagsItem>
+                      )}
+                    </>
+                  ))}
                 </TagsList>
               </TagsListContainer>
               <PostList>
                 {posts.map((post, index) => {
                   if (index < 3) {
-                    return <></>;
+                    return null;
                   }
 
                   return (
                     <Post image={post.thumbnail.url}>
-                      <div>
+                      <a href={`/blog/${post.id}`}>
                         <h1>{post.title}</h1>
                         <p>{post.subtitle}</p>
-                      </div>
+                      </a>
                     </Post>
                   );
                 })}
@@ -137,31 +193,5 @@ function Blog({ posts }: BlogProps) {
     </>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const posts = await api.post("", {
-    query: `query MyQuery {
-        allPosts {
-          id
-          tags
-          thumbnail {
-            url
-          }
-          title
-          subtitle
-          content {
-            value
-          }
-        }
-      }
-      `,
-  });
-
-  return {
-    props: {
-      posts: posts.data.data.allPosts,
-    },
-  };
-};
 
 export default Blog;

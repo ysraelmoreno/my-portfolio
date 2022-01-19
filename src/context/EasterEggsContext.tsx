@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useToast } from "../components/Toast/ToastContext";
-
+import { setCookie, parseCookies } from "nookies";
 export interface EasterEgg {
   R2: boolean;
   xWing: boolean;
@@ -21,7 +21,6 @@ const EasterEggsContext = createContext<EasterEggsContextData>(
 );
 
 export const EasterEggsProvider = ({ children }: EasterEggsProviderProps) => {
-  const [keys, setKeys] = useState<string[]>([]);
   const [isShowingEgg, setIsShowingEgg] = useState(false);
   const [easterEgg, setEasterEgg] = useState<"R2" | "xWing">(
     "" as "R2" | "xWing"
@@ -31,10 +30,6 @@ export const EasterEggsProvider = ({ children }: EasterEggsProviderProps) => {
   useEffect(() => {
     const keyListener = (event: KeyboardEvent) => {
       const key = event.key.toLowerCase();
-
-      if (keys.length >= 3) {
-        setKeys([]);
-      }
 
       if (isShowingEgg) {
         return;
@@ -49,8 +44,6 @@ export const EasterEggsProvider = ({ children }: EasterEggsProviderProps) => {
         setEasterEgg("xWing");
         setIsShowingEgg(true);
       }
-
-      return setKeys((keys) => [...keys, key]);
     };
 
     window.addEventListener("keydown", keyListener);
@@ -62,11 +55,20 @@ export const EasterEggsProvider = ({ children }: EasterEggsProviderProps) => {
 
   useEffect(() => {
     setTimeout(() => {
-      addToast({
-        message: "Press Shift + 2 to see a surprise",
-        description: "You can see a nice easter egg!",
-        type: "info",
-      });
+      const { easterEggToast } = parseCookies();
+
+      if (!easterEggToast) {
+        addToast({
+          message: "Press Shift + 2 to see a surprise",
+          description: "You can see a nice easter egg!",
+          type: "info",
+        });
+
+        setCookie(null, "easterEggToast", "true", {
+          maxAge: 30 * 24 * 60 * 60,
+          path: "/",
+        });
+      }
     }, 10000);
   }, [addToast]);
 

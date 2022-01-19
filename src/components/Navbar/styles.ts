@@ -115,7 +115,7 @@ export const MenuBar = styled(animated.div)<NavItemProps>`
     margin-top: 5px;
   }
 
-  ${(props) =>
+  ${(props: NavItemProps) =>
     props.isOpen &&
     css`
       width: 70%;

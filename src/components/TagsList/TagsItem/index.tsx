@@ -26,20 +26,19 @@ function TagsItem({
 
   useEffect(() => {
     registerTag(tag);
-  }, []);
+  }, [tag]);
 
   return (
-    <>
-      <TagsItemContainer
-        onClick={handleClick}
-        active={selectedTag === tag}
-        id={tag}
-        {...props}
-      >
-        {children}
-        {counter && <TagsCounter>{counter}</TagsCounter>}
-      </TagsItemContainer>
-    </>
+    <TagsItemContainer
+      onClick={handleClick}
+      active={selectedTag === tag}
+      id={tag}
+      data-value={tag}
+      {...props}
+    >
+      {children}
+      {counter && <TagsCounter>{counter}</TagsCounter>}
+    </TagsItemContainer>
   );
 }
 

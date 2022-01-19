@@ -214,8 +214,12 @@ export const Post = styled.div<PostProps>`
   position: relative;
   border-radius: 10px;
   z-index: 3;
+  transition: all 0.3s ease-in-out;
+  color: white;
 
-  div {
+  a {
+    color: white;
+    text-decoration: none;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -227,6 +231,10 @@ export const Post = styled.div<PostProps>`
 
   p {
     margin-top: 30px;
+  }
+
+  &:hover {
+    box-shadow: 0 0 7px 0.5px rgba(0, 0, 0, 0.3);
   }
 
   &::before {

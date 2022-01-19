@@ -1,9 +1,9 @@
 import { ToastContainer } from "./styles";
-import { Toast } from "./ToastContext";
+import { IToast } from "./ToastContext";
 import ToastItem from "./ToastItem";
 
 interface ToastProps {
-  toast: Toast[];
+  toast: IToast[];
 }
 
 function Toast({ toast }: ToastProps) {
